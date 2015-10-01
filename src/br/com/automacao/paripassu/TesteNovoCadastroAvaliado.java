@@ -60,7 +60,7 @@ public class TesteNovoCadastroAvaliado {
 		//localiza e insere topico 1
 		Thread.sleep(2000);
 		
-		editTopicoQuestionario(1, "Pelo negício da empresa, pela proposta e visão, pelos benefícios e "
+		editTopicoQuestionario(1, "Pelo negócio da empresa, pela proposta e visão, pelos benefícios e "
 				+ "pela possibilidade de crescimento.");
 		
 		editTopicoQuestionario(2, "Através dos anos pude concluir que fazer o que se gosta é o melhor"
