@@ -15,12 +15,12 @@ public class TesteNovoCadastroAvaliado {
 
 	private static WebDriver driver;
 	private static WebDriverWait wait;
-
+	private static final String URL_SITE = "http://teste.vaga-qa.paripassudev.com";
 	@BeforeClass
 	public static void setUp() {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.get("http://teste.vaga-qa.paripassudev.com");
+		driver.get(URL_SITE);
 		wait = new WebDriverWait(driver, 30);
 	}
 
@@ -39,7 +39,7 @@ public class TesteNovoCadastroAvaliado {
 		entrar.click();
 		Thread.sleep(5000);
 
-//		this.parteUM();
+		this.parteUM();
 		
 		Thread.sleep(5000);
 		//aplicando o questionário
@@ -60,9 +60,27 @@ public class TesteNovoCadastroAvaliado {
 		//localiza e insere topico 1
 		Thread.sleep(2000);
 		
-		editTopicoQuestionario(1, "minha resposta 1");
-		editTopicoQuestionario(2, "minha resposta 2");
-		editTopicoQuestionario(3, "minha resposta 3");
+		editTopicoQuestionario(1, "Pelo negício da empresa, pela proposta e visão, pelos benefícios e "
+				+ "pela possibilidade de crescimento.");
+		
+		editTopicoQuestionario(2, "Através dos anos pude concluir que fazer o que se gosta é o melhor"
+				+ " para a empresa e para o profissional, entretanto, se leva um tempo para ter "
+				+ "certeza do que se gosta. Testar, analisar o software necessita de curiosidade"
+				+ " do analista, conhecimento das técnicas e vontade de encontrar falhas. "
+				+ "Acredito que encontrar uma falha é tão importante quanto desenvolver."
+				+ " É meu perfil, ser parceiro do desenvolvedor a ponto de trabalharmos juntos"
+				+ " pra que o software obtenha qualidade, por isso testar é tão significativo. ");
+		
+		editTopicoQuestionario(3, "Naturalmente ficamos ansiosos diante de um problema, o que "
+				+ "me faz crer que ao conhecermos a situação possibilita que busquemos uma "
+				+ "maneira mais eficaz para chegar à solução. Inevitavelmente a experiência "
+				+ "diminui a ansiedade, entretanto, na área de qualidade é improvável que não"
+				+ " se encontre problemas, na verdade, encaro problemas como uma oportunidade "
+				+ "de melhorar, de crescer. Dependendo do tamanho do problema eu o divido, acho "
+				+ "mais fácil resolver por etapas, já tentei resolver tudo de uma só vez é isso"
+				+ " pode piorar as coisas. Tranquilidade, honestidade consigo e com os outros, "
+				+ "paciência e determinação são fatores chaves, penso eu, para resolver um problema.");
+		
 		
 		WebElement salvar = driver.findElement(By.linkText("Salvar"));
 		salvar.click();
@@ -95,7 +113,7 @@ public class TesteNovoCadastroAvaliado {
 		// cadastrando novo avaliado
 		Thread.sleep(3000);
 		WebElement nomeAvaliado = driver.findElement(By.name("avaliadoNome"));
-		nomeAvaliado.sendKeys("Sandro");
+		nomeAvaliado.sendKeys("Sandro Gonçalves");
 		Thread.sleep(3000);
 		WebElement salvarAvaliado = driver.findElement(By.linkText("Salvar"));
 		salvarAvaliado.click();
@@ -120,19 +138,20 @@ public class TesteNovoCadastroAvaliado {
 		// Adicionando e editando tópicos
 		Thread.sleep(5000);
 		
-		editLastTopico("esta empresa?");
+		editLastTopico("Por que você está interessado em trabalhar para esta empresa?");
 		
 		WebElement adicionarTopico = driver.findElement(By.xpath("//button[@ng-click='addTopic()']"));
 		adicionarTopico.click();
-		editLastTopico("esta empresa?");
+		editLastTopico("Por que você trabalha na área de qualidade de software? ");
 
 		adicionarTopico.click();
-		editLastTopico("esta empresa?");
+		editLastTopico("Como você lida com problemas?");
 		//salvando o questionário
 		WebElement SalvarQuestionario = driver.findElement(By.xpath("//button[@ng-click='save()']"));
 		SalvarQuestionario.click();
 	}
 
+	//respondendo o questionário
 	private void editLastTopico(String texto) throws InterruptedException {
 		List<WebElement> topicos = driver.findElements(By.cssSelector("div[ng-click='edit(topic.id)']"));
 		if (topicos.size() > 0) {
